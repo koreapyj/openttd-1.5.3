@@ -1461,6 +1461,18 @@ STR_CONFIG_SETTING_AI_IN_MULTIPLAYER_HELPTEXT                   :멀티 플레�
 STR_CONFIG_SETTING_SCRIPT_MAX_OPCODES                           :게임 스크립트가 중지되기 직전에 계산할 수 있는 최대 횟수: {STRING}
 STR_CONFIG_SETTING_SCRIPT_MAX_OPCODES_HELPTEXT                  :게임 스크립트가 한 단계에서 계산할 수 있는 최대 계산 횟수를 설정합니다.
 
+STR_CONFIG_SETTING_SHARING_RAIL                                 :{LTBLUE}철도 시설 공유 허용: {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_ROAD                                 :{LTBLUE}도로 시설 공유 허용: {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_WATER                                :{LTBLUE}항만 시설 공유 허용: {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_AIR                                  :{LTBLUE}공항 시설 공유 허용: {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_FEE_RAIL                             :{LTBLUE}철도 시설 이용료: 1000톤당 {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_FEE_ROAD                             :{LTBLUE}도로 시설 이용료: 매일 {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_FEE_WATER                            :{LTBLUE}항만 시설 이용료: 매일 {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_FEE_AIR                              :{LTBLUE}공항 시설 이용료: 매일 {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_PAYMENT_IN_DEBT                      :{LTBLUE}채무가 있는 회사가 시설 이용료를 지불하는 것을 허용: {ORANGE}{STRING}
+STR_CONFIG_SETTING_SHARING_USED_BY_VEHICLES                     :{WHITE}차량이 공유된 시설을 이용하고 있기 때문에 설정을 변경할 수 없습니다.
+STR_CONFIG_SETTING_SHARING_ORDERS_TO_OTHERS                     :{WHITE}경로에 공유된 시설이 있기 때문에 설정을 변경할 수 없습니다.
+
 STR_CONFIG_SETTING_SERVINT_ISPERCENT                            :신뢰도에 따른 정비 설정: {STRING}
 STR_CONFIG_SETTING_SERVINT_ISPERCENT_HELPTEXT                   :차량 점검 방식을 "마지막 점검 이후 지난 시간 (또는) 최대 신뢰도에 대한 차량 신뢰도의 일정 퍼센트 하락 여부" 중에 하나로 선택합니다.
 STR_CONFIG_SETTING_SERVINT_TRAINS                               :열차에 대한 기본 점검 기준: {STRING}
@@ -1688,6 +1700,7 @@ STR_CONFIG_SETTING_ENVIRONMENT_INDUSTRIES                       :{ORANGE}산업�
 STR_CONFIG_SETTING_ENVIRONMENT_CARGODIST                        :{ORANGE}화물 분배
 STR_CONFIG_SETTING_AI                                           :{ORANGE}경쟁자
 STR_CONFIG_SETTING_AI_NPC                                       :{ORANGE}컴퓨터 플레이어
+STR_CONFIG_SETTING_SHARING                                      :{ORANGE}시설 공유
 
 STR_CONFIG_SETTING_PATHFINDER_OPF                               :오리지널
 STR_CONFIG_SETTING_PATHFINDER_NPF                               :NPF
@@ -3196,6 +3209,8 @@ STR_FINANCES_SECTION_AIRCRAFT_INCOME                            :{GOLD}항공기
 STR_FINANCES_SECTION_SHIP_INCOME                                :{GOLD}선박 수익
 STR_FINANCES_SECTION_LOAN_INTEREST                              :{GOLD}이자
 STR_FINANCES_SECTION_OTHER                                      :{GOLD}기타
+STR_FINANCES_SECTION_INFRASTRUCTURE_COSTS                       :{GOLD}시설 이용료
+STR_FINANCES_SECTION_INFRASTRUCTURE_INCOME                      :{GOLD}시설 수익
 STR_FINANCES_NEGATIVE_INCOME                                    :{BLACK}-{CURRENCY_LONG}
 STR_FINANCES_POSITIVE_INCOME                                    :{BLACK}+{CURRENCY_LONG}
 STR_FINANCES_TOTAL_CAPTION                                      :{WHITE}총계:
