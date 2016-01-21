@@ -1563,18 +1563,12 @@ CommandCost CmdCloneOrder(TileIndex tile, DoCommandFlag flags, uint32 p1, uint32
 	Vehicle *dst = Vehicle::GetIfValid(veh_dst);
 	if (dst == NULL || !dst->IsPrimaryVehicle()) return CMD_ERROR;
 
-	CommandCost ret = CheckOwnership(dst->owner);
-	if (ret.Failed()) return ret;
-
 	switch (GB(p1, 30, 2)) {
 		case CO_SHARE: {
 			Vehicle *src = Vehicle::GetIfValid(veh_src);
 
 			/* Sanity checks */
 			if (src == NULL || !src->IsPrimaryVehicle() || dst->type != src->type || dst == src) return CMD_ERROR;
-
-			CommandCost ret = CheckOwnership(src->owner);
-			if (ret.Failed()) return ret;
 
 			/* Trucks can't share orders with busses (and visa versa) */
 			if (src->type == VEH_ROAD && RoadVehicle::From(src)->IsBus() != RoadVehicle::From(dst)->IsBus()) {
@@ -1631,9 +1625,6 @@ CommandCost CmdCloneOrder(TileIndex tile, DoCommandFlag flags, uint32 p1, uint32
 
 			/* Sanity checks */
 			if (src == NULL || !src->IsPrimaryVehicle() || dst->type != src->type || dst == src) return CMD_ERROR;
-
-			CommandCost ret = CheckOwnership(src->owner);
-			if (ret.Failed()) return ret;
 
 			/* Trucks can't copy all the orders from busses (and visa versa),
 			 * and neither can helicopters and aircraft. */
