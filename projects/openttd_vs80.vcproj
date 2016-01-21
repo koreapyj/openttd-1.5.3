@@ -599,6 +599,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\..\src\infrastructure.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\..\src\ini.cpp"
 				>
 			</File>
@@ -1196,6 +1200,10 @@
 			</File>
 			<File
 				RelativePath=".\..\src\industrytype.h"
+				>
+			</File>
+			<File
+				RelativePath=".\..\src\infrastructure_func.h"
 				>
 			</File>
 			<File
