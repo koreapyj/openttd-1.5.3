@@ -349,7 +349,7 @@ bool IsValidChar(WChar key, CharSetFilter afilter)
 }
 
 #ifdef WIN32
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && _MSC_VER < 1700
 /**
  * Almost POSIX compliant implementation of \c vsnprintf for VC compiler.
  * The difference is in the value returned on output truncation. This
@@ -382,7 +382,7 @@ int CDECL vsnprintf(char *str, size_t size, const char *format, va_list ap)
 	str[size - 1] = '\0';
 	return (int)size;
 }
-#endif /* _MSC_VER */
+#endif /* _MSC_VER < 1700 */
 
 #endif /* WIN32 */
 
