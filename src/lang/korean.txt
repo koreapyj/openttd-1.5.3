@@ -1536,6 +1536,8 @@ STR_CONFIG_SETTING_ALLOW_SHARES                                 :다른 회사�
 STR_CONFIG_SETTING_ALLOW_SHARES_HELPTEXT                        :이 옵션을 켜면, 회사의 지분을 거래할 수 있게 됩니다. 회사의 지분을 거래하려면 해당 회사가 어느 정도 오래되어야 합니다.
 STR_CONFIG_SETTING_FEEDER_PAYMENT_SHARE                         :환승시 벌어들이는 중간 수익의 비율: {STRING}
 STR_CONFIG_SETTING_FEEDER_PAYMENT_SHARE_HELPTEXT                :더 많은 수익을 내기 위해, 수송 관계상 중간 구간에게 주어진 수익의 비율을 설정합니다.
+STR_CONFIG_SETTING_SIMULATE_SIGNALS                             :터널이나 교량 신호기 설치 간격: {STRING}
+STR_CONFIG_SETTING_SIMULATE_SIGNALS_VALUE                       :{COMMA}칸 간격으로 설치
 STR_CONFIG_SETTING_DRAG_SIGNALS_DENSITY                         :신호기를 드래그로 설치하는 경우: {STRING}
 STR_CONFIG_SETTING_DRAG_SIGNALS_DENSITY_HELPTEXT                :신호기를 드래그할 때, 다음 장애물(신호기, 분기점 등)을 만날 때까지 신호기가 설치될 간격을 설정합니다.
 STR_CONFIG_SETTING_DRAG_SIGNALS_DENSITY_VALUE                   :{COMMA}칸 간격으로 설치
@@ -2672,8 +2674,10 @@ STR_LAI_WATER_DESCRIPTION_SHIP_DEPOT                            :정박소
 # Industries come directly from their industry names
 
 STR_LAI_TUNNEL_DESCRIPTION_RAILROAD                             :철도용 터널
+STR_LAI_TUNNEL_DESCRIPTION_RAILROAD_SIGNAL                      :신호기가 설치된 철도용 터널
 STR_LAI_TUNNEL_DESCRIPTION_ROAD                                 :도로용 터널
 
+STR_LAI_BRIDGE_DESCRIPTION_RAILROAD_SIGNAL                      :신호기가 설치된 철교
 STR_LAI_BRIDGE_DESCRIPTION_RAIL_SUSPENSION_STEEL                :강철 현수 철교
 STR_LAI_BRIDGE_DESCRIPTION_RAIL_GIRDER_STEEL                    :강철 들보 철교
 STR_LAI_BRIDGE_DESCRIPTION_RAIL_CANTILEVER_STEEL                :강철 캔틸레버 철교
