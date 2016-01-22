@@ -14,6 +14,7 @@
 
 #include "order_type.h"
 #include "date_type.h"
+#include "timetable.h"
 
 /** Various front vehicle properties that are preserved when autoreplacing, using order-backup or switching front engines within a consist. */
 struct BaseConsist {
