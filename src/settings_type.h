@@ -486,8 +486,6 @@ struct EconomySettings {
 	TownFoundingByte found_town;             ///< town founding, @see TownFounding
 	bool   station_noise_level;              ///< build new airports when the town noise level is still within accepted limits
 	uint16 town_noise_population[3];         ///< population to base decision on noise evaluation (@see town_council_tolerance)
-	bool   infrastructure_sharing[4];        ///< enable infrastructure sharing for rail/road/water/air
-	uint   sharing_fee[4];                   ///< fees for infrastructure sharing for rail/road/water/air
 	bool   sharing_payment_in_debt;          ///< allow fee payment for companies with more loan than money (switch off to prevent MP exploits)
 	bool   allow_town_level_crossings;       ///< towns are allowed to build level crossings
 	bool   infrastructure_maintenance;       ///< enable monthly maintenance fee for owner infrastructure
@@ -537,6 +535,8 @@ struct CompanySettings {
 	int16 engine_renew_months;               ///< months before/after the maximum vehicle age a vehicle should be renewed
 	uint32 engine_renew_money;               ///< minimum amount of money before autorenew is used
 	bool renew_keep_length;                  ///< sell some wagons if after autoreplace the train is longer than before
+	bool infrastructure_sharing[4];          ///< enable infrastructure sharing for rail/road/water/air
+	uint sharing_fee[4];                     ///< fees for infrastructure sharing for rail/road/water/air
 	VehicleDefaultSettings vehicle;          ///< default settings for vehicles
 };
 

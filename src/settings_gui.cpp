@@ -1586,6 +1586,14 @@ static SettingsContainer &GetSettingsTree()
 			company->Add(new SettingEntry("vehicle.servint_roadveh"));
 			company->Add(new SettingEntry("vehicle.servint_ships"));
 			company->Add(new SettingEntry("vehicle.servint_aircraft"));
+			company->Add(new SettingEntry("company.infrastructure_sharing[0]"));
+			company->Add(new SettingEntry("company.infrastructure_sharing[1]"));
+			company->Add(new SettingEntry("company.infrastructure_sharing[2]"));
+			company->Add(new SettingEntry("company.infrastructure_sharing[3]"));
+			company->Add(new SettingEntry("company.sharing_fee[0]"));
+			company->Add(new SettingEntry("company.sharing_fee[1]"));
+			company->Add(new SettingEntry("company.sharing_fee[2]"));
+			company->Add(new SettingEntry("company.sharing_fee[3]"));
 		}
 
 		SettingsPage *accounting = main->Add(new SettingsPage(STR_CONFIG_SETTING_ACCOUNTING));
@@ -1738,21 +1746,9 @@ static SettingsContainer &GetSettingsTree()
 				npc->Add(new SettingEntry("ai.ai_disable_veh_ship"));
 			}
 
-			SettingsPage *sharing = ai->Add(new SettingsPage(STR_CONFIG_SETTING_SHARING));
-			{
-				sharing->Add(new SettingEntry("economy.infrastructure_sharing[0]"));
-				sharing->Add(new SettingEntry("economy.infrastructure_sharing[1]"));
-				sharing->Add(new SettingEntry("economy.infrastructure_sharing[2]"));
-				sharing->Add(new SettingEntry("economy.infrastructure_sharing[3]"));
-				sharing->Add(new SettingEntry("economy.sharing_fee[0]"));
-				sharing->Add(new SettingEntry("economy.sharing_fee[1]"));
-				sharing->Add(new SettingEntry("economy.sharing_fee[2]"));
-				sharing->Add(new SettingEntry("economy.sharing_fee[3]"));
-				sharing->Add(new SettingEntry("economy.sharing_payment_in_debt"));
-			}
-
 			ai->Add(new SettingEntry("economy.give_money"));
 			ai->Add(new SettingEntry("economy.allow_shares"));
+			ai->Add(new SettingEntry("economy.sharing_payment_in_debt"));
 		}
 
 		main->Init();

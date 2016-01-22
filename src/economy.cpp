@@ -405,7 +405,7 @@ void ChangeOwnershipOfCompanyItems(Owner old_owner, Owner new_owner)
 			if (v->owner == old_owner && IsCompanyBuildableVehicleType(v->type)) {
 				if (new_owner == INVALID_OWNER) {
 					if (v->Previous() == NULL) {
-						if (_settings_game.economy.infrastructure_sharing[VEH_TRAIN] && v->type == VEH_TRAIN && Train::From(v)->IsFrontEngine()) {
+						if (v->type == VEH_TRAIN && Train::From(v)->IsFrontEngine()) {
 							DeleteVisibleTrain(Train::From(v));
 						} else {
 							delete v;
@@ -512,7 +512,7 @@ void ChangeOwnershipOfCompanyItems(Owner old_owner, Owner new_owner)
 			UpdateAllBlockSignals(new_owner);
 			
 		}
-		else if (_settings_game.economy.infrastructure_sharing[VEH_TRAIN]) {
+		else {
 			/* tracks are being removed while sharing is enabled.
 			 * Thus, update all signals and crossings. */
 			UpdateAllBlockSignals();

@@ -14,6 +14,7 @@
 
 #include "vehicle_base.h"
 #include "command_type.h"
+#include "company_base.h"
 #include "company_func.h"
 #include "settings_type.h"
 #include "tile_map.h"
@@ -34,7 +35,7 @@ void UpdateAllBlockSignals(Owner owner = INVALID_OWNER);
 */
 static inline bool IsInfraUsageAllowed(VehicleType type, Owner veh_owner, Owner infra_owner)
 {
-	return infra_owner == veh_owner || infra_owner == OWNER_NONE || _settings_game.economy.infrastructure_sharing[type];
+	return infra_owner == veh_owner || infra_owner == OWNER_NONE || Company::Get(infra_owner)->settings.infrastructure_sharing[type];
 }
 
 /**
@@ -61,7 +62,7 @@ static inline bool IsInfraTileUsageAllowed(VehicleType type, Owner veh_owner, Ti
 */
 static inline CommandCost CheckInfraUsageAllowed(VehicleType type, Owner infra_owner, TileIndex tile = 0)
 {
-	if (infra_owner == OWNER_NONE || _settings_game.economy.infrastructure_sharing[type]) return CommandCost();
+	if (infra_owner == OWNER_NONE || Company::Get(infra_owner)->settings.infrastructure_sharing[type]) return CommandCost();
 	return CheckOwnership(infra_owner, tile);
 }
 
@@ -100,7 +101,7 @@ static inline CommandCost CheckVehicleControlAllowed(const Vehicle *v)
 */
 static inline bool IsOneSignalBlock(Owner o1, Owner o2)
 {
-	return o1 == o2 || _settings_game.economy.infrastructure_sharing[VEH_TRAIN];
+	return o1 == o2 || Company::Get(o1)->settings.infrastructure_sharing[VEH_TRAIN] || Company::Get(o2)->settings.infrastructure_sharing[VEH_TRAIN];
 }
 
 #endif /* INFRASTRUCTURE_FUNC_H */

@@ -53,7 +53,7 @@ static void PaySharingFee(Vehicle *v, Owner infra_owner, Money cost)
 void PayStationSharingFee(Vehicle *v, const Station *st)
 {
 	if (v->owner == st->owner || st->owner == OWNER_NONE || v->type == VEH_TRAIN) return;
-	Money cost = _settings_game.economy.sharing_fee[v->type];
+	Money cost = Company::Get(st->owner)->settings.sharing_fee[v->type];
 	PaySharingFee(v, st->owner, (cost << 8) / DAY_TICKS);
 }
 
@@ -65,7 +65,7 @@ void PayDailyTrackSharingFee(Train *v)
 {
 	Owner owner = GetTileOwner(v->tile);
 	if (owner == v->owner) return;
-	Money cost = _settings_game.economy.sharing_fee[VEH_TRAIN] << 8;
+	Money cost = Company::Get(owner)->settings.sharing_fee[VEH_TRAIN] << 8;
 	/* Cost is calculated per 1000 tonnes */
 	cost = cost * v->gcache.cached_weight / 1000;
 	/* Only pay the required fraction */
@@ -154,7 +154,7 @@ static void RemoveAndSellVehicle(Vehicle *v, bool give_money)
 	}
 
 	/* take special measures for trains, but not when sharing is disabled or when the train is a free wagon chain */
-	if (_settings_game.economy.infrastructure_sharing[VEH_TRAIN] && v->type == VEH_TRAIN && Train::From(v)->IsFrontEngine()) {
+	if (Company::Get(_current_company)->settings.infrastructure_sharing[VEH_TRAIN] && v->type == VEH_TRAIN && Train::From(v)->IsFrontEngine()) {
 		DeleteVisibleTrain(Train::From(v));
 	}
 	else {
@@ -167,8 +167,6 @@ static void RemoveAndSellVehicle(Vehicle *v, bool give_money)
 */
 static void FixAllReservations()
 {
-	/* if this function is called, we can safely assume that sharing of rails is being switched off */
-	assert(!_settings_game.economy.infrastructure_sharing[VEH_TRAIN]);
 	Train *v;
 	FOR_ALL_TRAINS(v) {
 		if (!v->IsPrimaryVehicle() || (v->vehstatus & VS_CRASHED) != 0) continue;
@@ -185,16 +183,16 @@ static void FixAllReservations()
 		if (GetReservedTrackbits(next_tile) == TRACK_BIT_NONE) continue;
 
 		/* change sharing setting temporarily */
-		_settings_game.economy.infrastructure_sharing[VEH_TRAIN] = true;
+		Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = true;
 		PBSTileInfo end_tile_info2 = FollowTrainReservation(v);
 		/* if these two reservation ends differ, unreserve the path and try to reserve a new path */
 		if (end_tile_info.tile != end_tile_info2.tile || end_tile_info.trackdir != end_tile_info2.trackdir) {
 			FreeTrainTrackReservation(v);
-			_settings_game.economy.infrastructure_sharing[VEH_TRAIN] = false;
+			Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = false;
 			TryPathReserve(v, true);
 		}
 		else {
-			_settings_game.economy.infrastructure_sharing[VEH_TRAIN] = false;
+			Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = false;
 		}
 	}
 }
@@ -210,7 +208,7 @@ bool CheckSharingChangePossible(VehicleType type)
 {
 	if (type != VEH_AIRCRAFT) YapfNotifyTrackLayoutChange(INVALID_TILE, INVALID_TRACK);
 	/* Only do something when sharing is being disabled */
-	if (_settings_game.economy.infrastructure_sharing[type]) return true;
+	//if (_settings_game.economy.infrastructure_sharing[type]) return true;
 
 	StringID error_message = STR_NULL;
 	Vehicle *v;
