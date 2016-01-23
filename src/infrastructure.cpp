@@ -312,7 +312,7 @@ void UpdateAllBlockSignals(Owner owner)
 
 			if (!IsOneSignalBlock(track_owner, last_owner)) {
 				/* Cannot update signals of two different companies in one run,
-				* if these signal blocks are not joined */
+				 * if these signal blocks are not joined */
 				UpdateSignalsInBuffer();
 				last_owner = track_owner;
 			}

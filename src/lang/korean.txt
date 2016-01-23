@@ -3231,12 +3231,12 @@ STR_DEPARTURES_VEH                                              :{ORANGE}{VEHICL
 STR_DEPARTURES_CALLING_AT                                       :{TINY_FONT}{ORANGE}정차역:
 STR_DEPARTURES_CALLING_AT_LARGE                                 :{ORANGE}정차역:
 STR_DEPARTURES_CALLING_AT_FIRST_STATION                         :{STATION}
-STR_DEPARTURES_CALLING_AT_STATION                               :{RAW_STRING}, {STATION}
-STR_DEPARTURES_CALLING_AT_LAST_STATION                          :{RAW_STRING}, {STATION}
-STR_DEPARTURES_CALLING_AT_LIST                                  :{TINY_FONT}{ORANGE}{RAW_STRING}
-STR_DEPARTURES_CALLING_AT_LIST_LARGE                            :{ORANGE}{RAW_STRING}
-STR_DEPARTURES_CALLING_AT_LIST_SMART_TERMINUS                   :{TINY_FONT}{ORANGE}{RAW_STRING} ... {STATION}
-STR_DEPARTURES_CALLING_AT_LIST_SMART_TERMINUS_LARGE             :{ORANGE}{RAW_STRING} ... {STATION}
+STR_DEPARTURES_CALLING_AT_STATION                               :{STRING}, {STATION}
+STR_DEPARTURES_CALLING_AT_LAST_STATION                          :{STRING}, {STATION}
+STR_DEPARTURES_CALLING_AT_LIST                                  :{TINY_FONT}{ORANGE}{STRING}
+STR_DEPARTURES_CALLING_AT_LIST_LARGE                            :{ORANGE}{STRING}
+STR_DEPARTURES_CALLING_AT_LIST_SMART_TERMINUS                   :{TINY_FONT}{ORANGE}{STRING} ... {STATION}
+STR_DEPARTURES_CALLING_AT_LIST_SMART_TERMINUS_LARGE             :{ORANGE}{STRING} ... {STATION}
 
 STR_DEPARTURES_TYPE_TRAIN                                       :{ORANGE}{TRAIN}
 STR_DEPARTURES_TYPE_TRAIN_SILVER                                :{SILVER}{TRAIN}
@@ -4993,10 +4993,10 @@ STR_FORMAT_DATE_SHORT                                           :{1:NUM}년 {0:S
 STR_FORMAT_DATE_LONG                                            :{2:NUM}년 {1:STRING}월 {0:STRING}일
 STR_FORMAT_DATE_ISO                                             :{2:NUM}-{1:STRING}-{0:STRING}
 
-STR_FORMAT_DATE_MINUTES                                         :{0:RAW_STRING}:{1:RAW_STRING}
-STR_FORMAT_DATE_MINUTES_WITH_Y                                  :{2:NUM} / {0:RAW_STRING}:{1:RAW_STRING}
-STR_FORMAT_DATE_MINUTES_WITH_YM                                 :{2:DATE_SHORT} {0:RAW_STRING}:{1:RAW_STRING}
-STR_FORMAT_DATE_MINUTES_WITH_YMD                                :{2:DATE_LONG} {0:RAW_STRING}:{1:RAW_STRING}
+STR_FORMAT_DATE_MINUTES                                         :{0:STRING}:{1:STRING}
+STR_FORMAT_DATE_MINUTES_WITH_Y                                  :{2:NUM} / {0:STRING}:{1:STRING}
+STR_FORMAT_DATE_MINUTES_WITH_YM                                 :{2:DATE_SHORT} {0:STRING}:{1:STRING}
+STR_FORMAT_DATE_MINUTES_WITH_YMD                                :{2:DATE_LONG} {0:STRING}:{1:STRING}
 
 STR_FORMAT_BUOY_NAME                                            :{G=f}{TOWN} 부표
 STR_FORMAT_BUOY_NAME_SERIAL                                     :{TOWN} 부표 #{COMMA}
