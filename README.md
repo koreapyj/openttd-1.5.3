@@ -8,6 +8,7 @@ Includes:
 - Tunnel and bridge signals 3.02
 - Departure boards
 - Close adjacent level crossings
+- Automated timetables and separation
 
 Differences:
 - Infrastructure sharing settings are stored in company set table (means you can change sharing settings individually).
@@ -22,6 +23,7 @@ Differences:
 - Tunnel and bridge signals 3.02
 - Departure boards
 - Close adjacent level crossings
+- Automated timetables and separation
 
 차이점:
 - 시설 공유 설정은 이제 회사별로 저장됩니다.
