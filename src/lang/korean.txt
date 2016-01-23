@@ -3938,6 +3938,9 @@ STR_TIMETABLE_RESET_LATENESS_TOOLTIP                            :{BLACK}이 차�
 STR_TIMETABLE_AUTOFILL                                          :{BLACK}자동 시간 설정
 STR_TIMETABLE_AUTOFILL_TOOLTIP                                  :{BLACK}다음 운행시 자동으로 값을 얻어 시간표를 완성합니다. (역에 머무르는 시간값을 유지하려면 CTRL+클릭하십시오)
 
+STR_TIMETABLE_AUTOMATE                                          :{BLACK}자동 운행 관리
+STR_TIMETABLE_AUTOMATE_TOOLTIP                                  :{BLACK}시각표와 운행 간격을 자동으로 관리합니다.
+
 STR_TIMETABLE_EXPECTED                                          :{BLACK}예정일 기준
 STR_TIMETABLE_SCHEDULED                                         :{BLACK}예정 소요시간 기준
 STR_TIMETABLE_EXPECTED_TOOLTIP                                  :{BLACK}시간표 검사 기준을 도착 예정일과 도착 예정 시간 기준 중에서 선택합니다.
