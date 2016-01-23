@@ -1,5 +1,6 @@
 # OpenTTD Sora Pack
 한국어 설명은 아래를 보세요.
+
 Based on trunk 1.5.3 (r27462)
 
 Includes:
