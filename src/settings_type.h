@@ -511,6 +511,7 @@ struct EconomySettings {
 	bool   infrastructure_maintenance;       ///< enable monthly maintenance fee for owner infrastructure
 	uint8  ticks_per_minute;                 ///< how many ticks per minute
 	uint16 clock_offset;                     ///< clock offset in minutes
+	uint8  day_length_factor;                ///< factor which the length of day is multiplied
 };
 
 struct LinkGraphSettings {
