@@ -1161,6 +1161,9 @@ CommandCost CmdSkipToOrder(TileIndex tile, DoCommandFlag flags, uint32 p1, uint3
 		v->UpdateRealOrderIndex();
 
 		InvalidateVehicleOrder(v, VIWD_MODIFY_ORDERS);
+
+		v->ClearSeparation();
+		ClrBit(v->vehicle_flags, VF_TIMETABLE_STARTED);
 	}
 
 	/* We have an aircraft/ship, they have a mini-schedule, so update them all */
@@ -1611,6 +1614,14 @@ CommandCost CmdCloneOrder(TileIndex tile, DoCommandFlag flags, uint32 p1, uint32
 
 				/* Link this vehicle in the shared-list */
 				dst->AddToShared(src);
+
+				/* Set automation bit if target has it. */
+				if (HasBit(src->vehicle_flags, VF_AUTOMATE_TIMETABLE))
+					SetBit(dst->vehicle_flags, VF_AUTOMATE_TIMETABLE);
+
+				dst->ClearSeparation();
+				ClrBit(dst->vehicle_flags, VF_TIMETABLE_STARTED);
+
 
 				InvalidateVehicleOrder(dst, VIWD_REMOVE_ALL_ORDERS);
 				InvalidateVehicleOrder(src, VIWD_MODIFY_ORDERS);
