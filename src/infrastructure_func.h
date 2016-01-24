@@ -101,7 +101,15 @@ static inline CommandCost CheckVehicleControlAllowed(const Vehicle *v)
 */
 static inline bool IsOneSignalBlock(Owner o1, Owner o2)
 {
-	return o1 == o2 || Company::Get(o1)->settings.infrastructure_sharing[VEH_TRAIN] || Company::Get(o2)->settings.infrastructure_sharing[VEH_TRAIN];
+	if (o1 == o2)
+		return true;
+	if (o1 == INVALID_OWNER || o2 == INVALID_OWNER)
+		return true;
+	if (Company::Get(o1)->settings.infrastructure_sharing[VEH_TRAIN])
+		return true;
+	if (Company::Get(o2)->settings.infrastructure_sharing[VEH_TRAIN])
+		return true;
+	return false;
 }
 
 #endif /* INFRASTRUCTURE_FUNC_H */
