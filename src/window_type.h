@@ -104,6 +104,7 @@ enum WindowClass {
 	 */
 	WC_ERRMSG,
 
+	WC_WATCH_COMPANY,
 	/**
 	 * Tooltip window; %Window numbers:
 	 *   - 0 = #ToolTipsWidgets

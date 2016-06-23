@@ -400,6 +400,7 @@ STR_MAP_MENU_MAP_OF_WORLD                                       :Map of world
 STR_MAP_MENU_EXTRA_VIEW_PORT                                    :Extra viewport
 STR_MAP_MENU_LINGRAPH_LEGEND                                    :Cargo Flow Legend
 STR_MAP_MENU_SIGN_LIST                                          :Sign list
+STR_MAP_MENU_WATCH_COMPANY                                      :Watch Company
 
 ############ range for town menu starts
 STR_TOWN_MENU_TOWN_DIRECTORY                                    :Town directory
@@ -5117,3 +5118,7 @@ STR_PLANE                                                       :{BLACK}{PLANE}
 STR_SHIP                                                        :{BLACK}{SHIP}
 
 STR_TOOLBAR_RAILTYPE_VELOCITY                                   :{STRING} ({VELOCITY})
+
+STR_WATCH_WINDOW_TITLE                                          :{WHITE}Watching {RAW_STRING}.
+STR_WATCH_CLICK_TO_WATCH_COMPANY                                :{BLACK}Click here to watch company building
+STR_WATCH_CLICK_NEW_WINDOW                                      :{BLACK}Click here to open new watching window

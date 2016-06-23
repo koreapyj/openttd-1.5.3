@@ -392,6 +392,7 @@ vehiclelist.h
 viewport_func.h
 viewport_sprite_sorter.h
 viewport_type.h
+watch_gui.h
 water.h
 waypoint_base.h
 waypoint_func.h
@@ -509,6 +510,7 @@ transparency_gui.cpp
 tree_gui.cpp
 vehicle_gui.cpp
 viewport_gui.cpp
+watch_gui.cpp
 waypoint_gui.cpp
 
 # Widgets

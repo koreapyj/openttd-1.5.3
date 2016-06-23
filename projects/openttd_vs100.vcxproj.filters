@@ -1188,6 +1188,9 @@
     <ClInclude Include="..\src\viewport_type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\watch_gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\water.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1482,6 +1485,9 @@
     <ClCompile Include="..\src\viewport_gui.cpp">
       <Filter>GUI Source Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\watch_gui.cpp">
+      <Filter>GUI Source Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\waypoint_gui.cpp">
       <Filter>GUI Source Code</Filter>
     </ClCompile>
@@ -1513,6 +1519,9 @@
       <Filter>Widgets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\widgets\date_widget.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\widgets\departures_widget.h">
       <Filter>Widgets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\widgets\depot_widget.h">

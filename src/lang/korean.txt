@@ -401,6 +401,7 @@ STR_MAP_MENU_MAP_OF_WORLD                                       :전체 지도 �
 STR_MAP_MENU_EXTRA_VIEW_PORT                                    :외부 화면
 STR_MAP_MENU_LINGRAPH_LEGEND                                    :화물 흐름 범례
 STR_MAP_MENU_SIGN_LIST                                          :팻말 목록
+STR_MAP_MENU_WATCH_COMPANY                                      :경쟁사 사찰
 
 ############ range for town menu starts
 STR_TOWN_MENU_TOWN_DIRECTORY                                    :도시 목록
@@ -5119,3 +5120,7 @@ STR_PLANE                                                       :{G=f}{BLACK}{PL
 STR_SHIP                                                        :{G=f}{BLACK}{SHIP}
 
 STR_TOOLBAR_RAILTYPE_VELOCITY                                   :{STRING} ({VELOCITY})
+
+STR_WATCH_WINDOW_TITLE                                          :{WHITE}{STRING} 사찰
+STR_WATCH_CLICK_TO_WATCH_COMPANY                                :{BLACK}Click here to watch company building
+STR_WATCH_CLICK_NEW_WINDOW                                      :{BLACK}Click here to open new watching window

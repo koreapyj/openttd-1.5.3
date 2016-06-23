@@ -653,6 +653,7 @@
     <ClInclude Include="..\src\viewport_func.h" />
     <ClInclude Include="..\src\viewport_sprite_sorter.h" />
     <ClInclude Include="..\src\viewport_type.h" />
+    <ClInclude Include="..\src\watch_gui.h" />
     <ClInclude Include="..\src\water.h" />
     <ClInclude Include="..\src\waypoint_base.h" />
     <ClInclude Include="..\src\waypoint_func.h" />
@@ -751,6 +752,7 @@
     <ClCompile Include="..\src\tree_gui.cpp" />
     <ClCompile Include="..\src\vehicle_gui.cpp" />
     <ClCompile Include="..\src\viewport_gui.cpp" />
+    <ClCompile Include="..\src\watch_gui.cpp" />
     <ClCompile Include="..\src\waypoint_gui.cpp" />
     <ClInclude Include="..\src\widgets\airport_widget.h" />
     <ClInclude Include="..\src\widgets\ai_widget.h" />
@@ -762,6 +764,7 @@
     <ClInclude Include="..\src\widgets\company_widget.h" />
     <ClInclude Include="..\src\widgets\console_widget.h" />
     <ClInclude Include="..\src\widgets\date_widget.h" />
+    <ClInclude Include="..\src\widgets\departures_widget.h" />
     <ClInclude Include="..\src\widgets\depot_widget.h" />
     <ClInclude Include="..\src\widgets\dock_widget.h" />
     <ClCompile Include="..\src\widgets\dropdown.cpp" />

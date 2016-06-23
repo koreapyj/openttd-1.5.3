@@ -69,6 +69,7 @@ Company::Company(uint16 name_1, bool is_ai)
 
 	for (uint j = 0; j < 4; j++) this->share_owners[j] = COMPANY_SPECTATOR;
 	InvalidateWindowData(WC_PERFORMANCE_DETAIL, 0, INVALID_COMPANY);
+	InvalidateWindowClassesData(WC_WATCH_COMPANY, 0);
 }
 
 /** Destructor. */
@@ -91,6 +92,7 @@ void Company::PostDestructor(size_t index)
 	InvalidateWindowData(WC_LINKGRAPH_LEGEND, 0);
 	/* If the currently shown error message has this company in it, then close it. */
 	InvalidateWindowData(WC_ERRMSG, 0);
+	InvalidateWindowClassesData(WC_WATCH_COMPANY, 0);
 }
 
 /**

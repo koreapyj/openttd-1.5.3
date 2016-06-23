@@ -41,6 +41,7 @@
 #include "linkgraph/linkgraph_gui.h"
 #include "newgrf_debug.h"
 #include "hotkeys.h"
+#include "watch_gui.h"
 #include "engine_base.h"
 #include "highscore.h"
 #include "game/game.hpp"
@@ -449,6 +450,7 @@ enum MapMenuEntries {
 	MME_SHOW_EXTRAVIEWPORTS,
 	MME_SHOW_LINKGRAPH,
 	MME_SHOW_SIGNLISTS,
+	MME_SHOW_WATCH_COMPANY,
 	MME_SHOW_TOWNDIRECTORY,
 	MME_SHOW_INDUSTRYDIRECTORY,
 };
@@ -460,6 +462,7 @@ static CallBackFunction ToolbarMapClick(Window *w)
 	*list->Append() = new DropDownListStringItem(STR_MAP_MENU_EXTRA_VIEW_PORT,         MME_SHOW_EXTRAVIEWPORTS,    false);
 	*list->Append() = new DropDownListStringItem(STR_MAP_MENU_LINGRAPH_LEGEND,         MME_SHOW_LINKGRAPH,         false);
 	*list->Append() = new DropDownListStringItem(STR_MAP_MENU_SIGN_LIST,               MME_SHOW_SIGNLISTS,         false);
+	*list->Append() = new DropDownListStringItem(STR_MAP_MENU_WATCH_COMPANY,           MME_SHOW_WATCH_COMPANY,     false);
 	PopupMainToolbMenu(w, WID_TN_SMALL_MAP, list, 0);
 	return CBF_NONE;
 }
@@ -489,6 +492,7 @@ static CallBackFunction MenuClickMap(int index)
 		case MME_SHOW_EXTRAVIEWPORTS: ShowExtraViewPortWindow(); break;
 		case MME_SHOW_LINKGRAPH:      ShowLinkGraphLegend();     break;
 		case MME_SHOW_SIGNLISTS:      ShowSignList();            break;
+		case MME_SHOW_WATCH_COMPANY:  ShowWatchWindow(INVALID_COMPANY); break;
 		case MME_SHOW_TOWNDIRECTORY:  ShowTownDirectory();       break;
 		case MME_SHOW_INDUSTRYDIRECTORY: ShowIndustryDirectory(); break;
 	}

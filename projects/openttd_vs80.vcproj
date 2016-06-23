@@ -1887,6 +1887,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\..\src\watch_gui.h"
+				>
+			</File>
+			<File
 				RelativePath=".\..\src\water.h"
 				>
 			</File>
@@ -2287,6 +2291,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\..\src\watch_gui.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\..\src\waypoint_gui.cpp"
 				>
 			</File>
@@ -2332,6 +2340,10 @@
 			</File>
 			<File
 				RelativePath=".\..\src\widgets\date_widget.h"
+				>
+			</File>
+			<File
+				RelativePath=".\..\src\widgets\departures_widget.h"
 				>
 			</File>
 			<File
