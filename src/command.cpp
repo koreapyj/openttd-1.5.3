@@ -86,6 +86,7 @@ CommandProc CmdRefitVehicle;
 CommandProc CmdSendVehicleToDepot;
 CommandProc CmdSetVehicleVisibility;
 
+CommandProc CmdCoupleTrain;
 CommandProc CmdForceTrainProceed;
 CommandProc CmdReverseTrainDirection;
 
@@ -247,6 +248,7 @@ static const Command _command_proc_table[] = {
 	DEF_CMD(CmdSetVehicleVisibility,                           0, CMDT_COMPANY_SETTING       ), // CMD_SET_VEHICLE_VISIBILITY
 
 	DEF_CMD(CmdMoveRailVehicle,                                0, CMDT_VEHICLE_CONSTRUCTION  ), // CMD_MOVE_RAIL_VEHICLE
+	DEF_CMD(CmdCoupleTrain,                                    0, CMDT_VEHICLE_MANAGEMENT    ), // CMD_COUPLE_TRAIN
 	DEF_CMD(CmdForceTrainProceed,                              0, CMDT_VEHICLE_MANAGEMENT    ), // CMD_FORCE_TRAIN_PROCEED
 	DEF_CMD(CmdReverseTrainDirection,                          0, CMDT_VEHICLE_MANAGEMENT    ), // CMD_REVERSE_TRAIN_DIRECTION
 

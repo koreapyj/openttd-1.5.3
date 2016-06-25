@@ -1346,6 +1346,163 @@ CommandCost CmdMoveRailVehicle(TileIndex tile, DoCommandFlag flags, uint32 p1, u
 }
 
 /**
+* Union two trains on-the-road.
+* @param tile unused
+* @param flags type of operation
+*              Note: DC_AUTOREPLACE is set when autoreplace tries to undo its modifications or moves vehicles to temporary locations inside the depot.
+* @param p1 various bitstuffed elements
+* - p1 (bit  0 - 19) source vehicle index
+* - p1 (bit      20) move all vehicles following the source vehicle
+* @param p2 what wagon to put the source wagon AFTER
+* @param text unused
+* @return the cost of this operation or an error
+*/
+CommandCost CmdCoupleTrain(TileIndex tile, DoCommandFlag flags, uint32 p1, uint32 p2, const char *text)
+{
+	VehicleID s = GB(p1, 0, 20);
+	VehicleID d = GB(p2, 0, 20);
+	bool move_chain = HasBit(p1, 20);
+
+	Train *src = Train::GetIfValid(s);
+	Train *dst = Train::GetIfValid(d);
+	if (src == NULL) return CMD_ERROR;
+	if (dst == NULL) return CMD_ERROR;
+
+	if (src->owner != dst->owner) return CommandCost();
+
+	/* Do not allow moving crashed vehicles */
+	if (src->vehstatus & VS_CRASHED) return CMD_ERROR;
+	if (dst->vehstatus & VS_CRASHED) return CMD_ERROR;
+
+	/* deal with its parent vehicle */
+	src = src->GetFirstEnginePart();
+	dst = dst->GetFirstEnginePart();
+
+	/* don't move the same vehicle.. */
+	if (src == dst) return CommandCost();
+
+	/* locate the head of the two chains */
+	Train *src_head = src->First();
+	Train *dst_head = dst->First();
+
+	/* Now deal with articulated part of destination wagon */
+	dst = dst->GetLastEnginePart();
+
+	/* When moving all wagons, we can't have the same src_head and dst_head */
+	if (move_chain && src_head == dst_head) return CommandCost();
+
+	/* When moving a multiheaded part to be place after itself, bail out. */
+	if (!move_chain && dst != NULL && dst->IsRearDualheaded() && src == dst->other_multiheaded_part) return CommandCost();
+
+	/* First make a backup of the order of the trains. That way we can do
+	* whatever we want with the order and later on easily revert. */
+	TrainList original_src;
+	TrainList original_dst;
+
+	MakeTrainBackup(original_src, src_head);
+	MakeTrainBackup(original_dst, dst_head);
+
+	/* Also make backup of the original heads as ArrangeTrains can change them.
+	* For the destination head we do not care if it is the same as the source
+	* head because in that case it's just a copy. */
+	Train *original_src_head = src_head;
+	Train *original_dst_head = dst_head;
+
+	/* We want this information from before the rearrangement, but execute this after the validation.
+	* original_src_head can't be NULL; src is by definition != NULL, so src_head can't be NULL as
+	* src->GetFirst() always yields non-NULL, so eventually original_src_head != NULL as well. */
+	bool original_src_head_front_engine = original_src_head->IsFrontEngine();
+	bool original_dst_head_front_engine = original_dst_head->IsFrontEngine();
+
+	/* (Re)arrange the trains in the wanted arrangement. */
+	ArrangeTrains(&dst_head, dst, &src_head, src, move_chain);
+
+	CommandCost ret = ValidateTrains(original_dst_head, dst_head, original_src_head, src_head, true);
+	if (ret.Failed()) {
+		/* Restore the train we had. */
+		RestoreTrainBackup(original_src);
+		RestoreTrainBackup(original_dst);
+		return ret;
+	}
+
+	/* do it? */
+	if (flags & DC_EXEC) {
+		/* Remove old heads from the statistics */
+		if (original_src_head_front_engine) GroupStatistics::CountVehicle(original_src_head, -1);
+		if (original_dst_head_front_engine) GroupStatistics::CountVehicle(original_dst_head, -1);
+
+		/* First normalise the sub types of the chains. */
+		NormaliseSubtypes(src_head);
+		NormaliseSubtypes(dst_head);
+
+		/* There are 14 different cases:
+		*  1) front engine gets moved to a new train, it stays a front engine.
+		*     a) the 'next' part is a wagon that becomes a free wagon chain.
+		*     b) the 'next' part is an engine that becomes a front engine.
+		*     c) there is no 'next' part, nothing else happens
+		*  2) front engine gets moved to another train, it is not a front engine anymore
+		*     a) the 'next' part is a wagon that becomes a free wagon chain.
+		*     b) the 'next' part is an engine that becomes a front engine.
+		*     c) there is no 'next' part, nothing else happens
+		*  3) front engine gets moved to later in the current train, it is not a front engine anymore.
+		*     a) the 'next' part is a wagon that becomes a free wagon chain.
+		*     b) the 'next' part is an engine that becomes a front engine.
+		*  4) free wagon gets moved
+		*     a) the 'next' part is a wagon that becomes a free wagon chain.
+		*     b) the 'next' part is an engine that becomes a front engine.
+		*     c) there is no 'next' part, nothing else happens
+		*  5) non front engine gets moved and becomes a new train, nothing else happens
+		*  6) non front engine gets moved within a train / to another train, nothing hapens
+		*  7) wagon gets moved, nothing happens
+		*/
+		if (src == original_src_head && src->IsEngine() && !src->IsFrontEngine()) {
+			/* Cases #2 and #3: the front engine gets trashed. */
+			DeleteWindowById(WC_VEHICLE_VIEW, src->index);
+			DeleteWindowById(WC_VEHICLE_ORDERS, src->index);
+			DeleteWindowById(WC_VEHICLE_REFIT, src->index);
+			DeleteWindowById(WC_VEHICLE_DETAILS, src->index);
+			DeleteWindowById(WC_VEHICLE_TIMETABLE, src->index);
+			DeleteNewGRFInspectWindow(GSF_TRAINS, src->index);
+			SetWindowDirty(WC_COMPANY, _current_company);
+
+			/* Delete orders, group stuff and the unit number as we're not the
+			* front of any vehicle anymore. */
+			DeleteVehicleOrders(src);
+			RemoveVehicleFromGroup(src);
+			src->unitnumber = 0;
+		}
+
+		/* We weren't a front engine but are becoming one. So
+		* we should be put in the default group. */
+		if (original_src_head != src && dst_head == src) {
+			SetTrainGroupID(src, DEFAULT_GROUP);
+			SetWindowDirty(WC_COMPANY, _current_company);
+		}
+
+		/* Add new heads to statistics */
+		if (src_head != NULL && src_head->IsFrontEngine()) GroupStatistics::CountVehicle(src_head, 1);
+		if (dst_head != NULL && dst_head->IsFrontEngine()) GroupStatistics::CountVehicle(dst_head, 1);
+
+		/* Handle 'new engine' part of cases #1b, #2b, #3b, #4b and #5 in NormaliseTrainHead. */
+		NormaliseTrainHead(src_head);
+		NormaliseTrainHead(dst_head);
+
+		if (src_head != NULL) src_head->First()->MarkDirty();
+		if (dst_head != NULL) dst_head->First()->MarkDirty();
+
+		/* We are undoubtedly changing something in the depot and train list. */
+		InvalidateWindowClassesData(WC_TRAINS_LIST, 0);
+	}
+	else {
+		/* We don't want to execute what we're just tried. */
+		RestoreTrainBackup(original_src);
+		RestoreTrainBackup(original_dst);
+	}
+
+	return CommandCost();
+}
+
+/**
  * Sell a (single) train wagon/engine.
  * @param flags type of operation
  * @param t     the train wagon to sell
@@ -3034,9 +3191,23 @@ static Vehicle *FindTrainCollideEnum(Vehicle *v, void *data)
 	/* Happens when there is a train under bridge next to bridge head */
 	if (abs(v->z_pos - tcc->v->z_pos) > 5) return NULL;
 
-	/* crash both trains */
-	tcc->num += TrainCrashed(tcc->v);
-	tcc->num += TrainCrashed(coll);
+	if (tcc->v->direction != coll->direction) {
+		/* crash both trains */
+		tcc->num += TrainCrashed(tcc->v);
+		tcc->num += TrainCrashed(coll);
+	}
+	else {
+		tcc->v->vehstatus = VS_STOPPED;
+		tcc->v->cur_speed = 0;
+		coll->vehstatus = VS_STOPPED;
+		coll->cur_speed = 0;
+
+		CommandCost ret = DoCommand(0, tcc->v->index | 1 << 20, coll->index, DC_EXEC, CMD_COUPLE_TRAIN);
+		if (ret.Failed()) {
+			tcc->num += TrainCrashed(tcc->v);
+			tcc->num += TrainCrashed(coll);
+		}
+	}
 
 	return NULL; // continue searching
 }

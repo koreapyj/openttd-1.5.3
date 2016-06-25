@@ -219,6 +219,7 @@ enum Commands {
 	CMD_SET_VEHICLE_VISIBILITY,       ///< hide or unhide a vehicle in the build vehicle and autoreplace GUIs
 
 	CMD_MOVE_RAIL_VEHICLE,            ///< move a rail vehicle (in the depot)
+	CMD_COUPLE_TRAIN,                 ///< union trains on-the-road
 	CMD_FORCE_TRAIN_PROCEED,          ///< proceed a train to pass a red signal
 	CMD_REVERSE_TRAIN_DIRECTION,      ///< turn a train around
 
