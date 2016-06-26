@@ -4015,11 +4015,17 @@ static void ChangeTileOwner_Station(TileIndex tile, Owner old_owner, Owner new_o
 			/* Change owner of tile and all roadtypes */
 			ChangeTileOwner(tile, old_owner, new_owner);
 		} else {
-			DoCommand(tile, 0, 0, DC_EXEC | DC_BANKRUPT, CMD_LANDSCAPE_CLEAR);
-			/* Set tile owner of water under (now removed) buoy and dock to OWNER_NONE.
-			 * Update owner of buoy if it was not removed (was in orders).
-			 * Do not update when owned by OWNER_WATER (sea and rivers). */
-			if ((IsTileType(tile, MP_WATER) || IsBuoyTile(tile)) && IsTileOwner(tile, old_owner)) SetTileOwner(tile, OWNER_NONE);
+			if (GetStationType(tile) == STATION_RAIL || GetStationType(tile) == STATION_WAYPOINT) {
+				SetTileOwner(tile, OWNER_NONE);
+				InvalidateWindowClassesData(WC_STATION_LIST, 0);
+			}
+			else {
+				DoCommand(tile, 0, 0, DC_EXEC | DC_BANKRUPT, CMD_LANDSCAPE_CLEAR);
+				/* Set tile owner of water under (now removed) buoy and dock to OWNER_NONE.
+				* Update owner of buoy if it was not removed (was in orders).
+				* Do not update when owned by OWNER_WATER (sea and rivers). */
+				if ((IsTileType(tile, MP_WATER) || IsBuoyTile(tile)) && IsTileOwner(tile, old_owner)) SetTileOwner(tile, OWNER_NONE);
+			}
 		}
 	}
 }

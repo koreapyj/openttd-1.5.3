@@ -2814,7 +2814,22 @@ static void ChangeTileOwner_Track(TileIndex tile, Owner old_owner, Owner new_own
 
 		SetTileOwner(tile, new_owner);
 	} else {
-		DoCommand(tile, 0, 0, DC_EXEC | DC_BANKRUPT, CMD_LANDSCAPE_CLEAR);
+		/* Update company infrastructure counts. No need to dirty windows here, we'll redraw the whole screen anyway. */
+		uint num_pieces = 1;
+		if (IsPlainRail(tile)) {
+			TrackBits bits = GetTrackBits(tile);
+			num_pieces = CountBits(bits);
+			if (TracksOverlap(bits)) num_pieces *= num_pieces;
+		}
+		RailType rt = GetRailType(tile);
+		Company::Get(old_owner)->infrastructure.rail[rt] -= num_pieces;
+
+		if (HasSignals(tile)) {
+			uint num_sigs = CountBits(GetPresentSignals(tile));
+			Company::Get(old_owner)->infrastructure.signal -= num_sigs;
+		}
+
+		SetTileOwner(tile, OWNER_NONE);
 	}
 }
 

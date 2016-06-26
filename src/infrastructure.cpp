@@ -64,7 +64,7 @@ void PayStationSharingFee(Vehicle *v, const Station *st)
 void PayDailyTrackSharingFee(Train *v)
 {
 	Owner owner = GetTileOwner(v->tile);
-	if (owner == v->owner) return;
+	if (owner == v->owner || owner == OWNER_NONE) return;
 	Money cost = Company::Get(owner)->settings.sharing_fee[VEH_TRAIN] << 8;
 	/* Cost is calculated per 1000 tonnes */
 	cost = cost * v->gcache.cached_weight / 1000;
@@ -183,16 +183,19 @@ static void FixAllReservations()
 		if (GetReservedTrackbits(next_tile) == TRACK_BIT_NONE) continue;
 
 		/* change sharing setting temporarily */
-		Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = true;
+		if (GetTileOwner(next_tile) != OWNER_NONE)
+			Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = true;
 		PBSTileInfo end_tile_info2 = FollowTrainReservation(v);
 		/* if these two reservation ends differ, unreserve the path and try to reserve a new path */
 		if (end_tile_info.tile != end_tile_info2.tile || end_tile_info.trackdir != end_tile_info2.trackdir) {
 			FreeTrainTrackReservation(v);
-			Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = false;
+			if (GetTileOwner(next_tile) != OWNER_NONE)
+				Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = false;
 			TryPathReserve(v, true);
 		}
 		else {
-			Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = false;
+			if (GetTileOwner(next_tile) != OWNER_NONE)
+				Company::Get(GetTileOwner(next_tile))->settings.infrastructure_sharing[VEH_TRAIN] = false;
 		}
 	}
 }

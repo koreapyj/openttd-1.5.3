@@ -105,6 +105,8 @@ static inline bool IsOneSignalBlock(Owner o1, Owner o2)
 		return true;
 	if (o1 == INVALID_OWNER || o2 == INVALID_OWNER)
 		return true;
+	if (o1 == OWNER_NONE || o2 == OWNER_NONE)
+		return true;
 	if (Company::Get(o1)->settings.infrastructure_sharing[VEH_TRAIN])
 		return true;
 	if (Company::Get(o2)->settings.infrastructure_sharing[VEH_TRAIN])
